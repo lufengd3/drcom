@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin-top: 60px;
+  background-color: #fafafa;
+}
+.group {
+  margin: 20px 0 0 0;
+  font-size: 18px;
+}
+.group input {
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.group label {
+  display: inline-block;
+  width: 75px;
+  margin-right: 10px;
+  margin-left: 0;
+  text-align: right;
+}
+.group #uid,
+.group #ip,
+.group #pwd {
+  height: 25px;
+  width: 180px;
+  font-size: 20px;
+}
+.group #remberpwd,
+.group #showpwd {
+  margin-left: 24px;
+}
+.group #action {
+  font-size: 18px;
+  padding: 6px 30px;
+  display: block;
+  margin: 30px auto;
+}
+.group #hint {
+  display: inline-block;
+  margin: 5px 0 0 100px;
+}
+.group #error {
+  color: red;
+  margin: 5px 0 0 33px;
+}
+.group img {
+  vertical-align: sub;
+}
+
+/*# sourceMappingURL=maps/style.css.map */
