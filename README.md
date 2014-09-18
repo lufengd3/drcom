@@ -21,7 +21,7 @@ pause
 
 ##something
 
-最终在万能的河畔搜到学长以前写的chrome插件，直接通过web方式登录，年久失修，正好听说node-webkit写可以写客户端软件，参考了前辈的代码，其实就是**往服务器发个请求，将登录数据post过去**，不清楚那个数据格式是谁分析出来的，(那个chrome插件被人指认抄袭代码...)https://code.google.com/p/zghaia-drcom-extension/issues/detail?id=5。
+最终在万能的河畔搜到学长以前写的chrome插件，直接通过web方式登录，年久失修，正好听说node-webkit写可以写客户端软件，参考了前辈的代码，其实就是**往服务器发个请求，将登录数据post过去**，不清楚那个数据格式是谁分析出来的，(那个chrome插件被人指认抄袭代码...)https://code.google.com/p/zghaia-drcom-extension/issues/detail?id=5
 
 由于node-webkit实际上相当于将网页打包在chromuim中，所以最终打包好的软件比较大，40M左右，为了不至于让他显得如此臃肿，本想再添加功能掩饰一下，最近比较忙，一直没时间弄就搁置下了，看到河畔上经常有同学在问沙河网络的问题，就先发出来吧。
 
