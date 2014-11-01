@@ -4,28 +4,15 @@ drcom
 Uestc沙河校区教育网拨号器
 
 Windows客户端  http://pan.baidu.com/s/1dD3WAWx
+
 Mac客户端 http://pan.baidu.com/s/1gdsxnyz
 
----
-暑假刚搬到沙河，最初因为开vpn几分钟就掉线，抓包发现开vpn后机器连不上服务器了，所以掉线，这个帖子提供了解决方法  http://tieba.baidu.com/p/2890999039
-```
-@echo off
-for /F "tokens=3" %%* in ('route print ^| findstr "\<0.0.0.0\>"') do set "gw=%%*"
+拨号器与学校官方提供的拨号方式不同，这个使用的是web方式登录，与之前有人提供的chrome插件类似，此软件使用node-webkit打包成了各个平台的桌面软件。
 
-ipconfig /flushdns
-route add 202.115.254.0 mask 255.255.255.0 %gw% metric 25
-pause
-```
+使用web登录方式不需要再一直开着拨号器上网，使用全局vpn不再掉线，想使用路由器的同学特别推荐此种登录方式，登录一次后在路由器上设置为静态ip，一次拨号，终生幸福！
 
-####It works.
-
-##something
-
-最终在万能的河畔搜到学长以前写的chrome插件，直接通过web方式登录，年久失修，正好听说node-webkit写可以写客户端软件，参考了前辈的代码，其实就是**往服务器发个请求，将登录数据post过去**，不清楚那个数据格式是谁分析出来的，(那个chrome插件被人指认抄袭代码...)https://code.google.com/p/zghaia-drcom-extension/issues/detail?id=5
-
-由于node-webkit实际上相当于将网页打包在chromuim中，所以最终打包好的软件比较大，40M左右，为了不至于让他显得如此臃肿，本想再添加功能掩饰一下，最近比较忙，一直没时间弄就搁置下了，看到河畔上经常有同学在问沙河网络的问题，就先发出来吧。
+当你冒然拔掉路由器wan口网线时需要这个电话！信息中心电话：83203691，告诉他你的好被人登了就OK. 
 
 ---
 
-##路由器wifi使用
-由于使用web登录方式，登录后可直接关掉拨号器，通过在路由器设置静态ip可以不再掉线，即使断电也没关系，设置方法
+[路由器wifi设置方法](https://keith3.github.io/drcom.html)

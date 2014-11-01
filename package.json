@@ -1,13 +1,13 @@
 {
   "name": "dr.com",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.html",
   "window": {
     "title": "Uestc校园网拨号器",
     "toolbar": false,
-    "width": 300,
-    "height": 380,
+    "width": 290,
+    "height": 350,
     "position": "center",
     "resizable": false
   },
@@ -18,9 +18,5 @@
     "dr.com"
   ],
   "author": "lufeng",
-  "license": "MIT",
-  "devDependencies": {
-    "http": "0.0.0",
-    "nw": "0.0.0"
-  }
+  "license": "MIT"
 }

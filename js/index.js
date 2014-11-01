@@ -6,11 +6,26 @@ $(document).ready(function() {
         'icon': '../img/icon.png',
         'tooltip': 'Uestc教育网拨号器'
     });
-    var pwdType; // input type of password
-    // var server = "http://202.115.254.251/";
-
-    checkNet();
+    var menuBar = require('menuBar');
+    var menu = new menuBar(gui);
+    gui.Window.get().menu = menu.menu;
+    // 宿舍区 202.115.254.251
+    // 办公区 202.115.255.243
+    var server = ['http://202.115.254.251/', 'http://202.115.255.243/'];
     localStorage.remberPwd = 1;
+
+    checkNet(function() {
+        // choose server
+        http.get(server[0], function(res) {
+            if (res.statusCode == 200) {
+                localStorage.server = server[0];
+            } else {
+                localStorage.server = server[1];
+            }
+        });
+    });
+
+    // 设置ajax拨号超时行为
     $.ajaxSetup({
         timeout: 20000,
         error: function() {
@@ -21,21 +36,17 @@ $(document).ready(function() {
             }
         }
     });
+
     $('.group img').hide();
-
-    if (typeof localStorage.server == 'undefined') {
-        localStorage.server = 'http://202.115.254.251/'; 
-        localStorage.ip = "202.115.254.251";
-    }
-
-    $('#ip').val(localStorage.ip);
 
     if (localStorage.uid != '') {
         $('#uid').val(localStorage.uid);
         $('#pwd').val(localStorage.pwd);
     }
 
+    // hide/show password
     $("#showpwd").on("click", function() {
+        var pwdType; // input type of password
         $(this).is(':checked') ? pwdType = 'text' : pwdType = 'password';
         $('#pwd').attr('type', pwdType)
     });
@@ -47,17 +58,20 @@ $(document).ready(function() {
     $('form').submit(function(e) {
         e.preventDefault();
         $('#error').text('');
-        if (/\d+\.\d+\.\d+\.\d+/.test($('#ip').val())) {
+        if ($('#uid').val() != '' && $('#pwd').val() != '') {
             submitData(); 
+        } else if ($('#action').val() == '注销') {
+            xhr('注销');
+            localStorage.uid = '';
+            localStorage.pwd = '';
         } else {
-            alert('服务器地址错误');
+            alert('请填写用户名/密码');
+            return false;
         }
     });
 
     function submitData() {
         $('.group img').show();
-        localStorage.ip = $('#ip').val();
-        localStorage.server = 'http://' + localStorage.ip + '/';
         if (Number(localStorage.remberPwd)) {
             localStorage.uid = $('#uid').val();
             localStorage.pwd = $('#pwd').val();
@@ -68,6 +82,7 @@ $(document).ready(function() {
         xhr($('#action').val());
     };
 
+    // ajax拨号
     function xhr(action) {
         if (action === '拨号') {
             $('#hint').text('正在拨号 ');
@@ -99,6 +114,7 @@ $(document).ready(function() {
         }
     }
 
+    // 检查是否已联网
     function checkNet(callback) {
         http.get('http://www.baidu.com/', function(res) {
             if (res.statusCode != 200) {
@@ -112,16 +128,15 @@ $(document).ready(function() {
         });
     }
 
-    // 定义窗口事件
-    win.on('close', function() {
-        if ($('#action').val() == '注销') {
-            if (confirm('帐号还未下线，确认退出？')) {
-                this.close(true);
-            }
-        } else {
-            this.close(true);
-        }
-    });
+    // win.on('close', function() {
+    //     if ($('#action').val() == '注销') {
+    //         if (confirm('帐号还未下线，确认退出？')) {
+    //             this.close(true);
+    //         }
+    //     } else {
+    //         this.close(true);
+    //     }
+    // });
 
     // win.on('minimize', function() {
     //     this.hide();
