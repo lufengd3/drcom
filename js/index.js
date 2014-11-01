@@ -22,7 +22,7 @@ $(document).ready(function() {
             } else {
                 localStorage.server = server[1];
             }
-        });
+        }).end();
     });
 
     // 设置ajax拨号超时行为
@@ -125,7 +125,7 @@ $(document).ready(function() {
             if (callback && callback instanceof Function) {
                 callback();
             }
-        });
+        }).end();
     }
 
     // win.on('close', function() {
