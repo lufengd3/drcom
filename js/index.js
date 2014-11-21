@@ -11,23 +11,28 @@ $(document).ready(function() {
     gui.Window.get().menu = menu.menu;
     // 宿舍区 202.115.254.251
     // 办公区 202.115.255.243
-    var server = ['http://202.115.254.251/', 'http://202.115.255.243/'];
+    // var server = ['http://202.115.254.251/', 'http://202.115.255.243/'];
+    localStorage.server = 'http://192.168.9.12/cgi-bin/srun_portal'  
     localStorage.remberPwd = 1;
 
-    checkNet(function() {
-        // choose server
-        http.get(server[0], function(res) {
-            if (res.statusCode == 200) {
-                localStorage.server = server[0];
-            } else {
-                localStorage.server = server[1];
-            }
-        }).end();
-    });
+    // checkNet(function() {
+    //     // choose server
+    //     http.get(server[0], function(res) {
+    //         if (res.statusCode == 200) {
+    //             localStorage.server = server[0];
+    //         } else {
+    //             localStorage.server = server[1];
+    //         }
+    //     }).end();
+    // });
+    checkNet()
 
     // 设置ajax拨号超时行为
     $.ajaxSetup({
         timeout: 20000,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("referer", "http://192.168.9.12/srun_portal.html?&ac_id=2&sys=")
+        },
         error: function() {
             $('#hint').text('');
             $('.group img').hide();
@@ -86,12 +91,20 @@ $(document).ready(function() {
     function xhr(action) {
         if (action === '拨号') {
             $('#hint').text('正在拨号 ');
-            // $.post('http://202.115.254.251/', 
             $.post(localStorage.server, 
                 {
-                    'DDDDD': $('#uid').val(),
-                    'upass': $('#pwd').val(),
-                    '0MKKey': "%B5%C7%C2%BC+Login"
+                    'username': $('#uid').val(),
+                    'password': $('#pwd').val(),
+					'action': 'login',
+					'ac_id': 2,
+					'type': 1,
+					'wbaredirect': '',
+					'mac': '',
+					'user_ip': '',
+					'nas_ip': '',
+					'pop': 1,
+					'is_ldap': 1,
+					'nas_init_port': 1
                 },
                 function() {
                     checkNet(function() {
@@ -105,8 +118,7 @@ $(document).ready(function() {
             );
         } else {
             $('#hint').text('正在退出 ');
-            // $.get('http://202.115.254.251/F.htm', {}, function() {
-            $.get(localStorage.server + 'F.htm', {}, function() {
+            $.get(localStorage.server, {'action': 'logout'}, function() {
                 $('#action').val('拨号');
                 $('#hint').text('');
                 $('.group img').hide();
@@ -128,22 +140,5 @@ $(document).ready(function() {
         }).end();
     }
 
-    // win.on('close', function() {
-    //     if ($('#action').val() == '注销') {
-    //         if (confirm('帐号还未下线，确认退出？')) {
-    //             this.close(true);
-    //         }
-    //     } else {
-    //         this.close(true);
-    //     }
-    // });
-
-    // win.on('minimize', function() {
-    //     this.hide();
-    // });
-
-    // tray.on('click', function() {
-    //     this.show();
-    // });
 })
 
