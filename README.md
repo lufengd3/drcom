@@ -3,7 +3,7 @@ drcom
 
 Uestc沙河校区教育网拨号器
 
-下载地址:[https://keith3.github.io/drcom](https://keith3.github.io/drcom/index.html)
+下载地址:[https://lufengd3.github.io/drcom](https://lufengd3.github.io/drcom/index.html)
 
 拨号器与学校官方提供的拨号方式不同，这个使用的是web方式登录，与之前有人提供的chrome插件类似，此软件使用node-webkit打包成了各个平台的桌面软件。
 
